@@ -5,6 +5,5 @@ public record ProfessorDTO(
         String cpf,
         String rg,
         String endereco,
-        String celular
-) {
+        String celular ) {
 }

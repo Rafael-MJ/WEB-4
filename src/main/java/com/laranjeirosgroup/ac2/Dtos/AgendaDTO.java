@@ -8,5 +8,5 @@ public record AgendaDTO(
         LocalDateTime horario,
         String cidade,
         String uf,
-        String cep) {
+        String cep ) {
 }
