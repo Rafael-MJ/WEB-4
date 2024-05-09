@@ -1,12 +1,15 @@
 package com.laranjeirosgroup.ac2.Dtos;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record AgendaDTO(
-        LocalDate data,
-        LocalDateTime horario,
-        String cidade,
-        String uf,
-        String cep ) {
+    @NotNull LocalDate data,
+    @NotNull LocalDateTime horario,
+    @NotBlank String cidade,
+    @NotBlank String uf,
+    @NotBlank String cep ) {
 }
