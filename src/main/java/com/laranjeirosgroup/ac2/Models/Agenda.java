@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -14,18 +15,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Agenda")
-public class Agenda {
+@Table(name = "Agendas")
+public class Agenda implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    private LocalDate data;
-    private LocalDateTime horario;
-    private String cidade;
-    private String uf;
-    private String cep;
 
     @ManyToOne
     @JoinColumn
@@ -34,5 +29,18 @@ public class Agenda {
     @ManyToOne
     @JoinColumn
     private Curso curso;
+
+    private LocalDate data;
+    private LocalDateTime horario;
+    private String cidade;
+    private String uf;
+    private String cep;
+
+    @Override
+    public String toString() {
+        return "Agenda [id=" + id + ", professor=" + professor + ", curso="
+          + curso + ", data=" + data + ", horario=" + horario + ", cidade="
+          + cidade + ", uf=" + uf + ", cep=" + cep + "]";
+    }
 
 }

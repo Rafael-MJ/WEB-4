@@ -6,13 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Professor")
-public class Professor {
+@Table(name = "Professores")
+public class Professor implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -22,4 +25,11 @@ public class Professor {
     private String rg;
     private String endereco;
     private String celular;
+
+    @Override
+    public String toString() {
+        return "Professor [id=" + id + ", nome=" + nome + ", cpf=" + cpf
+          + ", rg=" + rg + ", endereco=" + endereco + ", celular=" + celular + "]";
+    }
+    
 }

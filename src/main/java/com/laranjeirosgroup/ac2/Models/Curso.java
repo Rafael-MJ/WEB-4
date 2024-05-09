@@ -6,13 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Curso")
-public class Curso {
+@Table(name = "Cursos")
+public class Curso implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +27,11 @@ public class Curso {
 
     //Todo: Professor
     //Todo: Agenda
+
+    @Override
+    public String toString() {
+        return "Curso [id=" + id + ", descricao=" + descricao + ", carga_horaria="
+          + cargaHoraria + ", objetivo=" + objetivo + ", ementa=" + ementa + "]";
+    }
+
 }
