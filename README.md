@@ -15,4 +15,8 @@ O projeto foi desenvolvido na IDE IntelliJ, consiste em um código para colocar 
 ## Publicação
 https://github.com/Rafael-MJ/WEB-4
 
+## Diagrama de classe
+![Diagrama Atividade 4](https://github.com/Rafael-MJ/WEB-4/assets/112291145/460aa56d-ec7d-454a-a587-d0ec6bc51e6a)
+
+
 ## Última atualização 08/05/24
