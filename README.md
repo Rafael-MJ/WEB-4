@@ -16,7 +16,6 @@ O projeto foi desenvolvido na IDE IntelliJ, consiste em um código para colocar 
 https://github.com/Rafael-MJ/WEB-4
 
 ## Diagrama de classe
-<img src="https://github.com/Rafael-MJ/WEB-4/assets/112291145/460aa56d-ec7d-454a-a587-d0ec6bc51e6a" style="width: 500px;">
-
+<img src="https://github.com/Rafael-MJ/WEB-4/assets/112291145/3fb6a081-e967-452f-9806-72be169a0b6d" style="width: 500px;">
 
 ## Última atualização 08/05/24
