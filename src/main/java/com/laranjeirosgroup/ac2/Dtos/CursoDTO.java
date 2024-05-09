@@ -4,5 +4,5 @@ public record CursoDTO(
         String descricao,
         String cargaHoraria,
         String objetivo,
-        String ementa) {
+        String ementa ) {
 }
