@@ -20,8 +20,9 @@ public class Curso implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String nome;
     private String descricao;
-    private String cargaHoraria;
+    private double cargaHoraria;
     private String objetivo;
     private String ementa;
 
@@ -30,7 +31,7 @@ public class Curso implements Serializable {
 
     @Override
     public String toString() {
-        return "Curso [id=" + id + ", descricao=" + descricao + ", carga_horaria="
+        return "Curso [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", carga_horaria="
           + cargaHoraria + ", objetivo=" + objetivo + ", ementa=" + ementa + "]";
     }
 
