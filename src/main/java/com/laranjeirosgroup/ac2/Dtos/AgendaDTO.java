@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record AgendaDTO(
-    @NotNull LocalDate data,
+    @NotNull LocalDateTime data,
     @NotNull LocalDateTime horario,
     @NotBlank String cidade,
     @NotBlank String uf,

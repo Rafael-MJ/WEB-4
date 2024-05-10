@@ -30,7 +30,7 @@ public class Agenda implements Serializable {
     @JoinColumn
     private Curso curso;
 
-    private LocalDate data;
+    private LocalDateTime data;
     private LocalDateTime horario;
     private String cidade;
     private String uf;
