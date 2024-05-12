@@ -1,14 +1,10 @@
 package com.laranjeirosgroup.ac2.Models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.engine.internal.Cascade;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @Setter
