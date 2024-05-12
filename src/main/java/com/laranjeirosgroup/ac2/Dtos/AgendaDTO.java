@@ -3,7 +3,6 @@ package com.laranjeirosgroup.ac2.Dtos;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record AgendaDTO(
@@ -11,5 +10,7 @@ public record AgendaDTO(
     @NotNull LocalDateTime horario,
     @NotBlank String cidade,
     @NotBlank String uf,
-    @NotBlank String cep ) {
+    @NotBlank String cep,
+    @NotNull int curso,
+    @NotNull int professor) {
 }

@@ -21,7 +21,7 @@ public class AgendaController {
 
   @PostMapping()
   public ResponseEntity<Object> register(@RequestBody @Valid AgendaDTO agendaDTO) {
-    return ResponseEntity.status(HttpStatus.OK).body(agendaService.registerAgenda(agendaDTO));
+    return ResponseEntity.status(HttpStatus.OK).body(agendaService.registerAgenda(agendaDTO, agendaDTO.professor(), agendaDTO.curso()));
   }
 
   @GetMapping()

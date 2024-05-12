@@ -21,7 +21,7 @@ public class CursoController {
 
   @PostMapping()
   public ResponseEntity<Object> register(@RequestBody @Valid CursoDTO cursoDTO) {
-    return ResponseEntity.status(HttpStatus.OK).body(cursoService.registerCurso(cursoDTO));
+    return ResponseEntity.status(HttpStatus.OK).body(cursoService.registerCurso(cursoDTO, cursoDTO.professor()));
   }
 
   @GetMapping()

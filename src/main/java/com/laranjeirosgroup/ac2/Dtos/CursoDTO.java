@@ -8,5 +8,6 @@ public record CursoDTO(
     @NotBlank String descricao,
     @NotNull double cargaHoraria,
     @NotBlank String objetivo,
-    @NotBlank String ementa ) {
+    @NotBlank String ementa,
+    int professor) {
 }

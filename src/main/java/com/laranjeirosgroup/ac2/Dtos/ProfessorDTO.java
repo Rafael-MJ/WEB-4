@@ -7,5 +7,6 @@ public record ProfessorDTO(
     @NotBlank String cpf,
     @NotBlank String rg,
     @NotBlank String endereco,
-    @NotBlank String celular ) {
+    @NotBlank String celular,
+    int curso) {
 }

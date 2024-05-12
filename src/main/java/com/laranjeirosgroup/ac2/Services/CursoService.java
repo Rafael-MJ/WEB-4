@@ -2,7 +2,9 @@ package com.laranjeirosgroup.ac2.Services;
 
 import com.laranjeirosgroup.ac2.Dtos.CursoDTO;
 import com.laranjeirosgroup.ac2.Models.Curso;
+import com.laranjeirosgroup.ac2.Models.Professor;
 import com.laranjeirosgroup.ac2.Repositories.CursoRepository;
+import com.laranjeirosgroup.ac2.Repositories.ProfessorRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +19,25 @@ public class CursoService {
   @Autowired()
   private CursoRepository cursoRepository;
 
+  @Autowired()
+  private ProfessorRepository professorRepository;
+
   @Transactional()
-  public Curso registerCurso(CursoDTO cursoDTO) {
+  public Curso registerCurso(CursoDTO cursoDTO, int professorId) {
     var newCurso = new Curso();
     BeanUtils.copyProperties(cursoDTO, newCurso);
 
+    Optional<Professor> optionalProfessor = professorRepository.findById(professorId);
+    if (optionalProfessor.isPresent()) {
+      Professor professor = optionalProfessor.get();
+      newCurso.setProfessor(professor);
+      professor.setCurso(newCurso);
+      professorRepository.save(professor);
+    }
+
     return cursoRepository.save(newCurso);
   }
+
 
   public List<Curso> getAllCursos() {
     return cursoRepository.findAll();

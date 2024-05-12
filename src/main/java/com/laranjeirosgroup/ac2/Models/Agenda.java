@@ -1,19 +1,17 @@
 package com.laranjeirosgroup.ac2.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "Agendas")
 public class Agenda implements Serializable {
@@ -23,11 +21,13 @@ public class Agenda implements Serializable {
     private int id;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(nullable = false)
+    @JsonIgnoreProperties({"agenda", "curso"})
     private Professor professor;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(nullable = false)
+    @JsonIgnoreProperties({"agenda", "professor"})
     private Curso curso;
 
     private LocalDateTime data;
@@ -35,12 +35,5 @@ public class Agenda implements Serializable {
     private String cidade;
     private String uf;
     private String cep;
-
-    @Override
-    public String toString() {
-        return "Agenda [id=" + id + ", professor=" + professor + ", curso="
-          + curso + ", data=" + data + ", horario=" + horario + ", cidade="
-          + cidade + ", uf=" + uf + ", cep=" + cep + "]";
-    }
 
 }

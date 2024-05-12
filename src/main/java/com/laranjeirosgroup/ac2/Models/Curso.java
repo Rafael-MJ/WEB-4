@@ -1,10 +1,9 @@
 package com.laranjeirosgroup.ac2.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -12,6 +11,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "Cursos")
 public class Curso implements Serializable {
@@ -26,13 +26,13 @@ public class Curso implements Serializable {
     private String objetivo;
     private String ementa;
 
-    //Todo: Professor
-    //Todo: Agenda
+    @ManyToOne
+    @JoinColumn()
+    @JsonIgnoreProperties({"agenda", "curso"})
+    private Professor professor;
 
-    @Override
-    public String toString() {
-        return "Curso [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", carga_horaria="
-          + cargaHoraria + ", objetivo=" + objetivo + ", ementa=" + ementa + "]";
-    }
-
+    @ManyToOne
+    @JoinColumn()
+    @JsonIgnoreProperties({"curso", "professor"})
+    private Agenda agenda;
 }
