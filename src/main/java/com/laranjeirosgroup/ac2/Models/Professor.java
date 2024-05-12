@@ -29,13 +29,13 @@ public class Professor implements Serializable {
     private String endereco;
     private String celular;
 
-    @ManyToOne
-    @JoinColumn()
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn
     @JsonIgnoreProperties({"agenda", "professor"})
     private Curso curso;
 
-    @ManyToOne
-    @JoinColumn()
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn
     @JsonIgnoreProperties({"curso", "professor"})
     private Agenda agenda;
 }

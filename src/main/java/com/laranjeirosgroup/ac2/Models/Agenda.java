@@ -20,12 +20,12 @@ public class Agenda implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(nullable = false)
     @JsonIgnoreProperties({"agenda", "curso"})
     private Professor professor;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(nullable = false)
     @JsonIgnoreProperties({"agenda", "professor"})
     private Curso curso;

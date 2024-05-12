@@ -44,7 +44,7 @@ public class CursoController {
   public ResponseEntity<Object> updateCursoById(@RequestBody @Valid CursoDTO cursoDto,
                                                     @PathVariable(value = "id") int cursoId) {
 
-    Optional<Curso> cursoModel = cursoService.updateCursoById(cursoDto, cursoId);
+    Optional<Curso> cursoModel = cursoService.updateCursoById(cursoDto, cursoId, cursoDto.professor());
 
     if (cursoModel.isEmpty()) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Curso id not found");

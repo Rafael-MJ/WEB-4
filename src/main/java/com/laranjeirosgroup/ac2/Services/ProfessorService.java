@@ -47,15 +47,25 @@ public class ProfessorService {
   }
 
   @Transactional()
-  public Optional<Professor> updateProfessorById(ProfessorDTO professorDto, int professorId) {
+  public Optional<Professor> updateProfessorById(ProfessorDTO professorDto, int professorId, int cursoId) {
     var professorModel = professorRepository.findById(professorId);
+    var cursoModel = cursoRepository.findById(cursoId);
 
     if (professorModel.isEmpty()) {
       return Optional.empty();
     }
 
+    if (cursoModel.isEmpty()) {
+      return Optional.empty();
+    }
+
     var updatedProfessor = professorModel.get();
     BeanUtils.copyProperties(professorDto, updatedProfessor);
+
+    var curso = cursoModel.get();
+    updatedProfessor.setCurso(curso);
+    curso.setProfessor(updatedProfessor);
+    cursoRepository.save(curso);
 
     return Optional.of(professorRepository.save(updatedProfessor));
   }

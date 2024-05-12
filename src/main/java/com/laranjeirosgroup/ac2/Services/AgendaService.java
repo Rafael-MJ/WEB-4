@@ -60,15 +60,35 @@ public class AgendaService {
   }
 
   @Transactional()
-  public Optional<Agenda> updateAgendaById(AgendaDTO agendaDto, int agendaId) {
+  public Optional<Agenda> updateAgendaById(AgendaDTO agendaDto, int agendaId, int professorId, int cursoId) {
     var agendaModel = agendaRepository.findById(agendaId);
+    var professorModel = professorRepository.findById(professorId);
+    var cursoModel = cursoRepository.findById(cursoId);
 
     if (agendaModel.isEmpty()) {
       return Optional.empty();
     }
 
+    if (professorModel.isEmpty()) {
+      return Optional.empty();
+    }
+
+    if (cursoModel.isEmpty()) {
+      return Optional.empty();
+    }
+
     var updatedAgenda = agendaModel.get();
     BeanUtils.copyProperties(agendaDto, updatedAgenda);
+
+    var curso = cursoModel.get();
+    updatedAgenda.setCurso(curso);
+    curso.setAgenda(updatedAgenda);
+    cursoRepository.save(curso);
+
+    var professor = professorModel.get();
+    updatedAgenda.setProfessor(professor);
+    professor.setAgenda(updatedAgenda);
+    professorRepository.save(professor);
 
     return Optional.of(agendaRepository.save(updatedAgenda));
   }

@@ -1,6 +1,5 @@
 package com.laranjeirosgroup.ac2.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,13 +25,13 @@ public class Curso implements Serializable {
     private String objetivo;
     private String ementa;
 
-    @ManyToOne
-    @JoinColumn()
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn
     @JsonIgnoreProperties({"agenda", "curso"})
     private Professor professor;
 
-    @ManyToOne
-    @JoinColumn()
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn
     @JsonIgnoreProperties({"curso", "professor"})
     private Agenda agenda;
 }

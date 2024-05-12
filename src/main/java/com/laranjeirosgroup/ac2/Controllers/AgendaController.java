@@ -44,7 +44,7 @@ public class AgendaController {
   public ResponseEntity<Object> updateAgendaById(@RequestBody @Valid AgendaDTO agendaDto,
                                                     @PathVariable(value = "id") int agendaId) {
 
-    Optional<Agenda> agendaModel = agendaService.updateAgendaById(agendaDto, agendaId);
+    Optional<Agenda> agendaModel = agendaService.updateAgendaById(agendaDto, agendaId, agendaDto.professor(), agendaDto.curso());
 
     if (agendaModel.isEmpty()) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Agenda id not found");
