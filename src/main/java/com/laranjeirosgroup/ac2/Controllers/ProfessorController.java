@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,16 @@ public class ProfessorController {
   @PostMapping()
   public ResponseEntity<Object> register(@RequestBody @Valid ProfessorDTO professorDTO) {
     return ResponseEntity.status(HttpStatus.OK).body(professorService.registerProfessor(professorDTO, professorDTO.curso()));
+  }
+
+  @GetMapping("/especializacao/{especializacao}")
+  public List<Professor> buscarProfessoresPorEspecializacao(@PathVariable String especializacao) {
+    return professorService.buscarProfessoresPorEspecializacao(especializacao);
+  }
+
+  @GetMapping("/{professorId}/disponibilidade")
+  public boolean verificarDisponibilidadeProfessor(@PathVariable Long professorId, @RequestParam LocalDateTime data) {
+    return professorService.verificarDisponibilidadeProfessor(professorId, data);
   }
 
   @GetMapping()

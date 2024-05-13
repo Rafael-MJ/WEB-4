@@ -3,6 +3,7 @@ package com.laranjeirosgroup.ac2.Services;
 import com.laranjeirosgroup.ac2.Dtos.ProfessorDTO;
 import com.laranjeirosgroup.ac2.Models.Curso;
 import com.laranjeirosgroup.ac2.Models.Professor;
+import com.laranjeirosgroup.ac2.Repositories.AgendaRepository;
 import com.laranjeirosgroup.ac2.Repositories.CursoRepository;
 import com.laranjeirosgroup.ac2.Repositories.ProfessorRepository;
 import org.springframework.beans.BeanUtils;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +23,18 @@ public class ProfessorService {
 
   @Autowired()
   private CursoRepository cursoRepository;
+
+  @Autowired
+  private AgendaRepository agendaRepository;
+
+  public List<Professor> buscarProfessoresPorEspecializacao(String especializacao) {
+    return professorRepository.findByEspecializacao(especializacao);
+  }
+
+  public boolean verificarDisponibilidadeProfessor(Long professorId, LocalDateTime data) {
+    int count = professorRepository.countAgendasByProfessorAndDate(professorId, data);
+    return count == 0;
+  }
 
   @Transactional()
   public Professor registerProfessor(ProfessorDTO professorDTO, int cursoId) {
