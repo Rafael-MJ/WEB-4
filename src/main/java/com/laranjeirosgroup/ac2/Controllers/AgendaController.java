@@ -53,6 +53,11 @@ public class AgendaController {
     return ResponseEntity.status(HttpStatus.OK).body(agendaService.registerAgenda(agendaDTO, agendaDTO.professor(), agendaDTO.curso()));
   }
 
+  @GetMapping("/professor/{professorId}")
+  public List<Agenda> buscarAgendasPorProfessor(@PathVariable Long professorId) {
+    return agendaService.buscarAgendasPorProfessor(professorId);
+  }
+
   @GetMapping()
   public ResponseEntity<List<Agenda>> getAllAgendas() {
     return ResponseEntity.status(HttpStatus.OK).body(agendaService.getAllAgendas());
