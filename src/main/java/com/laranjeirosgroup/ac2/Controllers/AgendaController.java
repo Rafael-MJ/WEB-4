@@ -49,10 +49,10 @@ public class AgendaController {
         return ResponseEntity.status(HttpStatus.OK).body(agendaService.registerAgenda(agendaDTO, agendaDTO.professor(), agendaDTO.curso()));
       }
 
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Professor e/ou curso inválido(s)");
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Professor não possui especialização necessária");
     }
 
-    return ResponseEntity.status(HttpStatus.OK).body(agendaService.registerAgenda(agendaDTO, agendaDTO.professor(), agendaDTO.curso()));
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Professor e/ou curso inválido(s)");
   }
 
   @GetMapping("/horarios/{professorId}")
