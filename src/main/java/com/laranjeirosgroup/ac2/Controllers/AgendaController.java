@@ -2,7 +2,11 @@ package com.laranjeirosgroup.ac2.Controllers;
 
 import com.laranjeirosgroup.ac2.Dtos.AgendaDTO;
 import com.laranjeirosgroup.ac2.Models.Agenda;
+import com.laranjeirosgroup.ac2.Models.Curso;
+import com.laranjeirosgroup.ac2.Models.Professor;
 import com.laranjeirosgroup.ac2.Services.AgendaService;
+import com.laranjeirosgroup.ac2.Services.CursoService;
+import com.laranjeirosgroup.ac2.Services.ProfessorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +24,33 @@ public class AgendaController {
   @Autowired()
   private AgendaService agendaService;
 
+  @Autowired()
+  private ProfessorService professorService;
+
+  @Autowired()
+  private CursoService cursoService;
+
   @PostMapping()
   public ResponseEntity<Object> register(@RequestBody @Valid AgendaDTO agendaDTO) {
+    Optional<Curso> curso = cursoService.getCursoById(agendaDTO.curso());
+    Optional<Professor> professor = professorService.getProfessorById(agendaDTO.professor());
+    boolean agendaDisponivel = professorService.verificarDisponibilidadeProfessor(agendaDTO.professor(), agendaDTO.data());
+
+    if (!agendaDisponivel) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Professor sem horário disponível");
+    }
+
+    if (professor.isPresent() && curso.isPresent()) {
+      Professor p = professor.get();
+      Curso c = curso.get();
+
+      if (p.getEspecializacao() == c.getEspecializacaoNecessaria()) {
+        return ResponseEntity.status(HttpStatus.OK).body(agendaService.registerAgenda(agendaDTO, agendaDTO.professor(), agendaDTO.curso()));
+      }
+
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Professor e/ou curso inválido(s)");
+    }
+
     return ResponseEntity.status(HttpStatus.OK).body(agendaService.registerAgenda(agendaDTO, agendaDTO.professor(), agendaDTO.curso()));
   }
 
