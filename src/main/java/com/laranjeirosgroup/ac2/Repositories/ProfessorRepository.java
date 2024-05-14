@@ -13,6 +13,6 @@ import java.util.List;
 public interface ProfessorRepository extends JpaRepository<Professor, Integer> {
     List<Professor> findByEspecializacao(Especializacao especializacao);
 
-    @Query("SELECT COUNT(a) FROM Agenda a WHERE a.professor.id = :professorId AND a.data = :data")
-    int countAgendasByProfessorAndDate(int professorId, LocalDateTime data);
+    @Query("SELECT COUNT(a) FROM Agenda a WHERE a.professor.id = :professorId AND a.dataHora = :dataHora")
+    int countAgendasByProfessorAndDate(int professorId, LocalDateTime dataHora);
 }

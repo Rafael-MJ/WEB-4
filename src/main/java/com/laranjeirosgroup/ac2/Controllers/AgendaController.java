@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +33,7 @@ public class AgendaController {
   public ResponseEntity<Object> register(@RequestBody @Valid AgendaDTO agendaDTO) {
     Optional<Curso> curso = cursoService.getCursoById(agendaDTO.curso());
     Optional<Professor> professor = professorService.getProfessorById(agendaDTO.professor());
-    boolean agendaDisponivel = professorService.verificarDisponibilidadeProfessor(agendaDTO.professor(), agendaDTO.data());
+    boolean agendaDisponivel = professorService.verificarDisponibilidadeProfessor(agendaDTO.professor(), agendaDTO.dataHora());
 
     if (!agendaDisponivel) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Professor sem horário disponível");

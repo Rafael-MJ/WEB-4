@@ -30,8 +30,7 @@ public class Agenda implements Serializable {
     @JsonIgnoreProperties({"agenda", "professor"})
     private Curso curso;
 
-    private LocalDateTime data;
-    private LocalDateTime horario;
+    private LocalDateTime dataHora;
     private String cidade;
     private String uf;
     private String cep;
