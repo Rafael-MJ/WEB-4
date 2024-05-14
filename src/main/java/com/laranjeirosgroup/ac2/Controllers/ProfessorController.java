@@ -3,6 +3,7 @@ package com.laranjeirosgroup.ac2.Controllers;
 import com.laranjeirosgroup.ac2.Dtos.ProfessorDTO;
 import com.laranjeirosgroup.ac2.Models.Professor;
 import com.laranjeirosgroup.ac2.Services.ProfessorService;
+import com.laranjeirosgroup.ac2.enums.Especializacao;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,12 +27,12 @@ public class ProfessorController {
   }
 
   @GetMapping("/especializacao/{especializacao}")
-  public List<Professor> buscarProfessoresPorEspecializacao(@PathVariable String especializacao) {
+  public List<Professor> buscarProfessoresPorEspecializacao(@PathVariable Especializacao especializacao) {
     return professorService.buscarProfessoresPorEspecializacao(especializacao);
   }
 
   @GetMapping("/{professorId}/disponibilidade")
-  public boolean verificarDisponibilidadeProfessor(@PathVariable Long professorId, @RequestParam LocalDateTime data) {
+  public boolean verificarDisponibilidadeProfessor(@PathVariable int professorId, @RequestParam LocalDateTime data) {
     return professorService.verificarDisponibilidadeProfessor(professorId, data);
   }
 

@@ -1,6 +1,7 @@
 package com.laranjeirosgroup.ac2.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.laranjeirosgroup.ac2.enums.Especializacao;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,7 @@ public class Professor implements Serializable {
     private String rg;
     private String endereco;
     private String celular;
+    private Especializacao especializacao;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn

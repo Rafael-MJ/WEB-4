@@ -1,6 +1,7 @@
 package com.laranjeirosgroup.ac2.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.laranjeirosgroup.ac2.enums.Especializacao;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,7 @@ public class Curso implements Serializable {
     private double cargaHoraria;
     private String objetivo;
     private String ementa;
+    private Especializacao especializacaoNecessaria;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn

@@ -6,6 +6,7 @@ import com.laranjeirosgroup.ac2.Models.Professor;
 import com.laranjeirosgroup.ac2.Repositories.AgendaRepository;
 import com.laranjeirosgroup.ac2.Repositories.CursoRepository;
 import com.laranjeirosgroup.ac2.Repositories.ProfessorRepository;
+import com.laranjeirosgroup.ac2.enums.Especializacao;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,11 @@ public class ProfessorService {
   @Autowired
   private AgendaRepository agendaRepository;
 
-  public List<Professor> buscarProfessoresPorEspecializacao(String especializacao) {
+  public List<Professor> buscarProfessoresPorEspecializacao(Especializacao especializacao) {
     return professorRepository.findByEspecializacao(especializacao);
   }
 
-  public boolean verificarDisponibilidadeProfessor(Long professorId, LocalDateTime data) {
+  public boolean verificarDisponibilidadeProfessor(int professorId, LocalDateTime data) {
     int count = professorRepository.countAgendasByProfessorAndDate(professorId, data);
     return count == 0;
   }
