@@ -41,11 +41,6 @@ public class AgendaController {
     return ResponseEntity.status(HttpStatus.OK).body(agendaModel);
   }
 
-  @GetMapping("/professor/{professorId}")
-  public List<Agenda> buscarAgendasPorProfessorEData(@PathVariable Long professorId, @RequestParam LocalDateTime data) {
-    return agendaService.buscarAgendasPorProfessorEData(professorId, data);
-  }
-
   @PutMapping("/{id}")
   public ResponseEntity<Object> updateAgendaById(@RequestBody @Valid AgendaDTO agendaDto,
                                                     @PathVariable(value = "id") int agendaId) {

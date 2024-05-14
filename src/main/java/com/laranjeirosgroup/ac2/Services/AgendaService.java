@@ -94,10 +94,6 @@ public class AgendaService {
     return Optional.of(agendaRepository.save(updatedAgenda));
   }
 
-  public List<Agenda> buscarAgendasPorProfessorEData(Long professorId, LocalDateTime data) {
-    return agendaRepository.findByProfessorIdAndData(professorId, data);
-  }
-
   @Transactional()
   public Optional<Agenda> deleteAgendaById(int agendaId) {
     var agendaModel = agendaRepository.findById(agendaId);

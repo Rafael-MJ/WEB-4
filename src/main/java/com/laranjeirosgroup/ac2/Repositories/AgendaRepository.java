@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface AgendaRepository extends JpaRepository<Agenda, Integer> {
-    List<Agenda> findByProfessorIdAndData(Long professorId, LocalDateTime data);
 }
