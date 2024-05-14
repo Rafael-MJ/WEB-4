@@ -7,12 +7,14 @@ import com.laranjeirosgroup.ac2.Models.Professor;
 import com.laranjeirosgroup.ac2.Services.AgendaService;
 import com.laranjeirosgroup.ac2.Services.CursoService;
 import com.laranjeirosgroup.ac2.Services.ProfessorService;
+import com.laranjeirosgroup.ac2.Utils.AgendaUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,9 +35,9 @@ public class AgendaController {
   public ResponseEntity<Object> register(@RequestBody @Valid AgendaDTO agendaDTO) {
     Optional<Curso> curso = cursoService.getCursoById(agendaDTO.curso());
     Optional<Professor> professor = professorService.getProfessorById(agendaDTO.professor());
-    boolean agendaDisponivel = professorService.verificarDisponibilidadeProfessor(agendaDTO.professor(), agendaDTO.dataHora());
+    List<LocalDateTime> agendaDisponivel = agendaService.findHorariosByProfessorId(agendaDTO.professor());
 
-    if (!agendaDisponivel) {
+    if (AgendaUtil.verificarDisponibilidade(agendaDisponivel, agendaDTO.dataHora())) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Professor sem horário disponível");
     }
 
@@ -54,7 +56,7 @@ public class AgendaController {
   }
 
   @GetMapping("/professor/{professorId}")
-  public List<Agenda> buscarAgendasPorProfessor(@PathVariable Long professorId) {
+  public List<Agenda> buscarAgendasPorProfessor(@PathVariable int professorId) {
     return agendaService.buscarAgendasPorProfessor(professorId);
   }
 

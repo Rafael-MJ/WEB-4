@@ -31,11 +31,6 @@ public class ProfessorController {
     return professorService.buscarProfessoresPorEspecializacao(especializacao);
   }
 
-  @GetMapping("/{professorId}/disponibilidade")
-  public boolean verificarDisponibilidadeProfessor(@PathVariable int professorId, @RequestParam LocalDateTime data) {
-    return professorService.verificarDisponibilidadeProfessor(professorId, data);
-  }
-
   @GetMapping()
   public ResponseEntity<List<Professor>> getAllProfessores() {
     return ResponseEntity.status(HttpStatus.OK).body(professorService.getAllProfessores());

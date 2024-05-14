@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,11 +29,6 @@ public class ProfessorService {
 
   public List<Professor> buscarProfessoresPorEspecializacao(Especializacao especializacao) {
     return professorRepository.findByEspecializacao(especializacao);
-  }
-
-  public boolean verificarDisponibilidadeProfessor(int professorId, LocalDateTime data) {
-    int count = professorRepository.countAgendasByProfessorAndDate(professorId, data);
-    return count == 0;
   }
 
   @Transactional()

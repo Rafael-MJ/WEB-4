@@ -52,8 +52,12 @@ public class AgendaService {
     return agendaRepository.save(newAgenda);
   }
 
-  public List<Agenda> buscarAgendasPorProfessor(Long professorId) {
+  public List<Agenda> buscarAgendasPorProfessor(int professorId) {
     return agendaRepository.findByProfessorId(professorId);
+  }
+
+  public List<LocalDateTime> findHorariosByProfessorId(int professorId) {
+    return agendaRepository.findHorariosByProfessorId(professorId);
   }
 
   public List<Agenda> getAllAgendas() {
