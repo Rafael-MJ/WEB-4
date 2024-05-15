@@ -34,5 +34,6 @@ public class Agenda implements Serializable {
     private String cidade;
     private String uf;
     private String cep;
+    private String resumoTreinamento;
 
 }

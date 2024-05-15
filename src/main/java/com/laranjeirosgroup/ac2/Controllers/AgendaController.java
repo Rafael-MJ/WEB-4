@@ -105,4 +105,14 @@ public class AgendaController {
     return ResponseEntity.status(HttpStatus.OK).body("Agenda deleted successfuly");
   }
 
+  @PostMapping("/resumoTreinamento/{id}")
+  public ResponseEntity<Object> registerResumo(@PathVariable(value = "id") int agendaId, @RequestBody String resumoTreinamento) {
+    Optional<Agenda> agendaModel = agendaService.registerResumo(agendaId, resumoTreinamento);
+    if (agendaModel.isPresent()) {
+      return ResponseEntity.ok().build();
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  }
+
 }

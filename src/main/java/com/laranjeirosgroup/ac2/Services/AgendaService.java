@@ -115,4 +115,19 @@ public class AgendaService {
     return agendaModel;
   }
 
+  @Transactional()
+  public Optional<Agenda> registerResumo(int agendaId, String resumoTreinamento) {
+    var agendaModel = agendaRepository.findById(agendaId);
+
+    if (agendaModel.isEmpty()) {
+      return Optional.empty();
+    }
+
+    var agenda = agendaModel.get();
+    agenda.setResumoTreinamento(resumoTreinamento);
+    agendaRepository.save(agenda);
+
+    return Optional.of(agendaRepository.save(agenda));
+  }
+
 }
