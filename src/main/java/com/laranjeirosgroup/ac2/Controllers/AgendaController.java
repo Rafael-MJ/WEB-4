@@ -1,6 +1,7 @@
 package com.laranjeirosgroup.ac2.Controllers;
 
 import com.laranjeirosgroup.ac2.Dtos.AgendaDTO;
+import com.laranjeirosgroup.ac2.Dtos.CheckDisponibilidadeDTO;
 import com.laranjeirosgroup.ac2.Models.Agenda;
 import com.laranjeirosgroup.ac2.Models.Curso;
 import com.laranjeirosgroup.ac2.Models.Professor;
@@ -13,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,12 +54,13 @@ public class AgendaController {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Professor e/ou curso inválido(s)");
   }
 
-  @GetMapping("/professor/disponivel")
+  @PostMapping("/professor/disponivel")
   public ResponseEntity<List<Professor>> findProfessoresDisponiveis(
-    @RequestParam("horaDataInicio") LocalDateTime horaDataInicio,
-    @RequestParam("horaDataFim") LocalDateTime horaDataFim) {
+    @RequestBody CheckDisponibilidadeDTO checkDisponibilidadeDTO) {
 
-    return ResponseEntity.status(HttpStatus.OK).body(agendaService.findProfessoresDisponiveis(horaDataInicio, horaDataFim));
+    return ResponseEntity.status(HttpStatus.OK).body(agendaService.findProfessoresDisponiveis(
+      checkDisponibilidadeDTO.dataHoraInicio(),
+      checkDisponibilidadeDTO.dataHoraFim()));
   }
 
   @GetMapping("/professor/{professorId}")
