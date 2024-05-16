@@ -33,15 +33,15 @@ public class AgendaController {
   public ResponseEntity<Object> register(@RequestBody @Valid AgendaDTO agendaDTO) {
     Optional<Curso> curso = cursoService.getCursoById(agendaDTO.curso());
     Optional<Professor> professor = professorService.getProfessorById(agendaDTO.professor());
-    boolean isAgendaLotada = agendaService.isAgendaLotada(agendaDTO.professor(), agendaDTO.dataHoraInicio(), agendaDTO.dataHoraFim());
-
-    if (isAgendaLotada) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Professor sem horário disponível");
-    }
+    List<Professor> professoresDisponiveis = agendaService.findProfessoresDisponiveis(agendaDTO.dataHoraInicio(), agendaDTO.dataHoraFim());
 
     if (professor.isPresent() && curso.isPresent()) {
       Professor p = professor.get();
       Curso c = curso.get();
+
+      if (!professoresDisponiveis.contains(professor.get())) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Professor sem horário disponível");
+      }
 
       if (p.getEspecializacao() == c.getEspecializacaoNecessaria()) {
         return ResponseEntity.status(HttpStatus.OK).body(agendaService.registerAgenda(agendaDTO, agendaDTO.professor(), agendaDTO.curso()));
