@@ -6,7 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record AgendaDTO(
-    @NotNull LocalDateTime dataHora,
+    @NotNull LocalDateTime dataHoraInicio,
+    @NotNull LocalDateTime dataHoraFim,
     @NotBlank String cidade,
     @NotBlank String uf,
     @NotBlank String cep,

@@ -56,8 +56,8 @@ public class AgendaService {
     return agendaRepository.findByProfessorId(professorId);
   }
 
-  public List<LocalDateTime> findHorariosByProfessorId(int professorId) {
-    return agendaRepository.findHorariosByProfessorId(professorId);
+  public boolean isAgendaLotada(int professorId, LocalDateTime inicio, LocalDateTime fim) {
+    return agendaRepository.isAgendaLotada(professorId, inicio, fim);
   }
 
   public List<Agenda> getAllAgendas() {
