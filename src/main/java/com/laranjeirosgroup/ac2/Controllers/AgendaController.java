@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,10 +54,13 @@ public class AgendaController {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Professor e/ou curso inválido(s)");
   }
 
-  /* @GetMapping("/horarios/{professorId}")
-  public ResponseEntity<List<LocalDateTime>> isProfessorDisponivel(@PathVariable int professorId) {
-    return ResponseEntity.status(HttpStatus.OK).body(agendaService.isProfessorDisponivel(professorId));
-  } */
+  @GetMapping("/professor/disponivel")
+  public ResponseEntity<List<Professor>> findProfessoresDisponiveis(
+    @RequestParam("horaDataInicio") LocalDateTime horaDataInicio,
+    @RequestParam("horaDataFim") LocalDateTime horaDataFim) {
+
+    return ResponseEntity.status(HttpStatus.OK).body(agendaService.findProfessoresDisponiveis(horaDataInicio, horaDataFim));
+  }
 
   @GetMapping("/professor/{professorId}")
   public List<Agenda> buscarAgendasPorProfessor(@PathVariable int professorId) {
