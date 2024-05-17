@@ -14,8 +14,11 @@
 ## Descrição
 O projeto foi desenvolvido na IDE IntelliJ, consiste em um código para colocar em prova o conhecimento em arquitetura web, criando um gerenciador de agenda para professores.
 
+## Apresentação (211908)
+https://youtu.be/Zd--QRXGD8Y
+
 ## Diagrama de classe
-<img src="assets/diagrama.png" style="width: 475px;">
+<img src="assets/diagrama.jpg" style="width: 475px;">
 
 ## Requisitos
 #### A entrega deverá ser um documento com:
