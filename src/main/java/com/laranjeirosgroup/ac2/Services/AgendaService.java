@@ -33,20 +33,23 @@ public class AgendaService {
     var newAgenda = new Agenda();
     BeanUtils.copyProperties(agendaDTO, newAgenda);
 
-    Optional<Professor> optionalProfessor = professorRepository.findById(professorId);
-    if (optionalProfessor.isPresent()) {
-      Professor professor = optionalProfessor.get();
-      newAgenda.setProfessor(professor);
-      professor.setAgenda(newAgenda);
-      professorRepository.save(professor);
-    }
-
     Optional<Curso> optionalCurso = cursoRepository.findById(cursoId);
+    Optional<Professor> optionalProfessor = professorRepository.findById(professorId);
+
     if (optionalCurso.isPresent()) {
       Curso curso = optionalCurso.get();
       newAgenda.setCurso(curso);
       curso.setAgenda(newAgenda);
+      curso.setProfessor(optionalProfessor.get());
       cursoRepository.save(curso);
+    }
+
+    if (optionalProfessor.isPresent()) {
+      Professor professor = optionalProfessor.get();
+      newAgenda.setProfessor(professor);
+      professor.setAgenda(newAgenda);
+      professor.setCurso(optionalCurso.get());
+      professorRepository.save(professor);
     }
 
     return agendaRepository.save(newAgenda);

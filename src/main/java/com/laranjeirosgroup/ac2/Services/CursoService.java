@@ -84,4 +84,8 @@ public class CursoService {
     return cursoModel;
   }
 
+  public List<Professor> findProfessoresCapacitados(int cursoId) {
+    return cursoRepository.findProfessorEspecilizacaoCurso(cursoId);
+  }
+
 }

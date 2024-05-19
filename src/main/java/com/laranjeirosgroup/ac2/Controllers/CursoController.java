@@ -2,6 +2,7 @@ package com.laranjeirosgroup.ac2.Controllers;
 
 import com.laranjeirosgroup.ac2.Dtos.CursoDTO;
 import com.laranjeirosgroup.ac2.Models.Curso;
+import com.laranjeirosgroup.ac2.Models.Professor;
 import com.laranjeirosgroup.ac2.Services.CursoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,12 @@ public class CursoController {
     }
 
     return ResponseEntity.status(HttpStatus.OK).body("Curso deleted successfuly");
+  }
+
+  @GetMapping("/professores/{id}")
+  public ResponseEntity<List<Professor>> getProfessoresCapacitados(@PathVariable(value = "id") int cursoId) {
+    List<Professor> professores = cursoService.findProfessoresCapacitados(cursoId);
+    return ResponseEntity.status(HttpStatus.OK).body(professores);
   }
 
 }
